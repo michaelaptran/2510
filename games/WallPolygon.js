@@ -1,8 +1,4 @@
-class Polygon extends Component{
-    fillStyle = "magenta"
-
-    points = []
-
+class WallPolygon extends Component{
     draw(ctx) {
         let position = this.transform.position
 
@@ -14,11 +10,14 @@ class Polygon extends Component{
         ctx.translate(position.x, position.y)
 
         ctx.beginPath()
-        for(const point of this.points){
-            ctx.lineTo(point.x, point.y)
-        }
-
-        ctx.fillStyle = this.fillStyle
+        ctx.moveTo(15,50)
+        ctx.lineTo(15,50)
+        ctx.lineTo(15, 75)
+        ctx.lineTo(60,75)
+        ctx.lineTo(60,50)
+    
+                
+        ctx.fillStyle = "purple"
         ctx.fill()
 
         //Signaling that I'm done drawing
