@@ -11,13 +11,12 @@ class WallPolygon extends Component{
 
         ctx.beginPath()
         ctx.moveTo(15,50)
-        ctx.lineTo(15,50)
         ctx.lineTo(15, 75)
         ctx.lineTo(60,75)
         ctx.lineTo(60,50)
     
                 
-        ctx.fillStyle = "purple"
+        ctx.fillStyle = "Blue"
         ctx.fill()
 
         //Signaling that I'm done drawing

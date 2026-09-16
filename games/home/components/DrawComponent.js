@@ -1,4 +1,4 @@
-class LaserPolygon extends Component{
+class DrawComponent extends Component{
     draw(ctx) {
         let position = this.transform.position
 
@@ -10,20 +10,20 @@ class LaserPolygon extends Component{
         ctx.translate(position.x, position.y)
 
         ctx.beginPath()
-        ctx.lineTo(0,-17)
-        ctx.lineTo(5,-25)
-        ctx.lineTo(50,-25)
-        ctx.lineTo(55,-17)
-        ctx.lineTo(27,30)
+        ctx.lineTo(0,-35)
+        ctx.lineTo(10,-50)
+        ctx.lineTo(100,-50)
+        ctx.lineTo(110,-35)
+        ctx.lineTo(55,60)
                 
         ctx.fillStyle = "purple"
         ctx.fill()
 
-        ctx.lineTo(27,-17)
-        ctx.lineTo(35,-5)
+        ctx.lineTo(55,-35)
+        ctx.lineTo(70,-5)
 
 
-        ctx.fillStyle = "green"
+        ctx.fillStyle = "red"
         ctx.fill()
 
         //Signaling that I'm done drawing
