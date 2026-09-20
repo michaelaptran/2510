@@ -1,5 +1,8 @@
 class UpdateComponent extends Component{
 
+
+    speed = 200
+
     start(){
         this.timeSinceLastLaser = 0
 
@@ -11,13 +14,13 @@ class UpdateComponent extends Component{
         console.log(Input.keysDown)
 
         if (Input.keysDown.includes("ArrowUp"))
-            this.transform.position.y = this.transform.position.y - 10
+            this.transform.position.y = this.transform.position.y - Time.deltaTime * this.speed
         if (Input.keysDown.includes("ArrowDown"))
-            this.transform.position.y = this.transform.position.y + 10
+            this.transform.position.y = this.transform.position.y + Time.deltaTime * this.speed
         if (Input.keysDown.includes("ArrowLeft"))
-            this.transform.position.x = this.transform.position.x - 10
+            this.transform.position.x = this.transform.position.x - Time.deltaTime * this.speed
         if (Input.keysDown.includes("ArrowRight"))
-            this.transform.position.x = this.transform.position.x + 10
+            this.transform.position.x = this.transform.position.x + Time.deltaTime * this.speed
 
 
         if (this.timeSinceLastLaser > 20){
