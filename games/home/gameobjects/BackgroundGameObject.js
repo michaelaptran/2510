@@ -1,6 +1,6 @@
 class BackgroundGameObject extends GameObject{
     constructor(){
-        super()
+        super("Background")
 
         this.addComponent(new BackgroundController())
 

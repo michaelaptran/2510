@@ -3,6 +3,6 @@ class Time{
     static time = 0
 
     static update(){
-        Time.time += Time.deltatime
+        Time.time += Time.deltaTime
     }
 }

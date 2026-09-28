@@ -1,17 +1,15 @@
-class WallController extends Component{
+class Wall2Controller extends Component{
     direction = 1
     update(){
-        
-    this.transform.position.x += Time.deltaTime * 300 * this.direction
+    this.transform.position.x += Time.deltaTime * 120 * this.direction
         if(this.transform.position.x > 1600){
             this.direction = -1
         }
         if(this.transform.position.x < -50){
             this.direction = 1
         }
+            
 
-
-        // Collision check and moves MainGameObject back to starting position
         let myPosition = this.transform.position
         let mainGameObject = GameObject.find("Main")
         if(mainGameObject){

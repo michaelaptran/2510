@@ -1,6 +1,6 @@
 class MainGameObject extends GameObject{
     constructor(){
-        super()
+        super("Main")
         this.addComponent(new UpdateComponent())
         this.addComponent(new Polygon(), {fillStyle:"white", points:[
             //Frog body 
