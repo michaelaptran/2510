@@ -10,14 +10,6 @@ class Wall2Controller extends Component{
         }
             
 
-        let myPosition = this.transform.position
-        let mainGameObject = GameObject.find("Main")
-        if(mainGameObject){
-            let mainPosition = mainGameObject.transform.position
-            let distance = myPosition.minus(mainPosition).magnitude
-            if(distance < 15){
-                mainGameObject.transform.position = new Vector2(875,800)
-            }
-        }
+
     }
 }
