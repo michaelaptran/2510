@@ -5,4 +5,7 @@ class Assets{
         new Vector2(2000,-300),
         new Vector2(0,-300),
     ]
+    static Trees = [
+        
+    ]
 }

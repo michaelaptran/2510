@@ -1,4 +1,4 @@
 class Settings{
-    static layers = ["background","cars","UI"]
+    static layers = ["background","Wall","UI"]
 
 }

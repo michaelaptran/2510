@@ -1,6 +1,6 @@
 class UpdateComponent extends Component{
 
-    speed = 500
+    speed = 20
     start(){
 
 
@@ -22,11 +22,11 @@ class UpdateComponent extends Component{
 
         let myPosition = this.transform.position
         let mainGameObject = GameObject.find("Main")
-        let wallGameObjects = GameObject.findGameObjectsWithTag("Wall")
-        for(const wallGameObject of wallGameObjects){
-            let wallPosition = wallGameObject.transform.position
-            let distance = myPosition.minus(wallPosition).magnitude
-            if(distance < 15){
+        let carGameObjects = GameObject.findGameObjectsWithTag("Wall")
+        for(const carGameObject of carGameObjects){
+            let carPosition = carGameObject.transform.position
+            let distance = myPosition.minus(carPosition).magnitude
+            if(distance < 5){
                 mainGameObject.destroy()
 
             }

@@ -1,7 +1,7 @@
-class Wall2GameObject extends GameObject{
+class LogsGameObject extends GameObject{
     constructor(){
-        super("Wall2", ["Wall"])
-        this.addComponent(new Wall2Controller())
+        super("Logs", ["Wall"])
+        this.addComponent(new LogsController())
         this.addComponent(new Polygon(), {fillStyle:"brown", points:[
             new Vector2(250,-10),
             new Vector2(250,20),
