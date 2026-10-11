@@ -1,6 +1,6 @@
 class UpdateComponent extends Component{
 
-    speed = 20
+    speed = 50
     start(){
 
 
@@ -31,7 +31,7 @@ class UpdateComponent extends Component{
 
             }
         }
-        Camera.main.transform.positon = this.transform.position.clone()
+        Camera.main.transform.position = this.transform.position.clone()
 
     }
 
