@@ -23,7 +23,7 @@ class UpdateComponent extends Component{
             this.transform.position.x = this.transform.position.x + Time.deltaTime * this.speed
 
 
-        if (this.timeSinceLastLaser > 20){
+        if (this.timeSinceLastLaser > 20 && Input.keysDown.includes("Space")){
             this.timeSinceLastLaser = 0
             let laserGameObject = instantiate(new LaserGameObject(), this.transform.position.clone())
             if (Math.random() < .5)

@@ -18,7 +18,7 @@ class Transform extends Component{
 
     getWorldMatrix(){
         if (!this.parent)
-             return this.getLocalMatrix
-        return this. parent.getWorldMatrix().multiply(this.getLocalMatrix())
+             return this.getLocalMatrix()
+        return this.parent.getWorldMatrix().multiply(this.getLocalMatrix())
     }
 }

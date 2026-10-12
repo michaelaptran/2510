@@ -2,7 +2,7 @@ class MainGameObject extends GameObject{
     constructor(){
         super("Main")
         this.addComponent(new UpdateComponent())
-        this.addComponent(new Polygon(), {fillStyle:"black", points:[
+        this.addComponent(new Polygon(), {fillStyle:"green", points:[
             //Frog body 
             new Vector2(-30,-20),
             new Vector2(-20,-35),
@@ -16,7 +16,6 @@ class MainGameObject extends GameObject{
             new Vector2(-15,25),
             new Vector2(-25,10),
         ]})
-
     
 }
 }

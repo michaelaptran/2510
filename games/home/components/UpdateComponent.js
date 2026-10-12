@@ -1,6 +1,6 @@
 class UpdateComponent extends Component{
 
-    speed = 50
+    jump = 50
     start(){
 
 
@@ -10,14 +10,22 @@ class UpdateComponent extends Component{
 
         console.log(Input.keysDown)
 
-        if (Input.keysDown.includes("ArrowUp"))
-            this.transform.position.y = this.transform.position.y - Time.deltaTime * this.speed
-        if (Input.keysDown.includes("ArrowDown"))
-            this.transform.position.y = this.transform.position.y + Time.deltaTime * this.speed
-        if (Input.keysDown.includes("ArrowLeft"))
-            this.transform.position.x = this.transform.position.x - Time.deltaTime * this.speed
-        if (Input.keysDown.includes("ArrowRight"))
-            this.transform.position.x = this.transform.position.x + Time.deltaTime * this.speed
+        if (Input.keysDownThisFrame.includes("ArrowUp")){
+            this.transform.position.y = this.transform.position.y - this.jump
+            //this.transform.rotation = 0
+        }
+        else if (Input.keysDownThisFrame.includes("ArrowDown")){
+            this.transform.position.y = this.transform.position.y + this.jump
+            //this.transform.rotation = Math.PI
+        }
+        else if (Input.keysDownThisFrame.includes("ArrowLeft")){
+            this.transform.position.x = this.transform.position.x - this.jump
+            //this.transform.rotation = -Math.PI / 2
+        }
+        else if (Input.keysDownThisFrame.includes("ArrowRight")){
+            this.transform.position.x = this.transform.position.x + this.jump
+            //this.transform.rotation = Math.PI / 2
+        }
 
 
         let myPosition = this.transform.position

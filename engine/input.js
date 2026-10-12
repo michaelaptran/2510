@@ -45,6 +45,8 @@ class Input{
     static update(){
         Input.keysDownThisFrame = []
         Input.keysUpThisFrame = []
+        Input.mouseButtonsDownThisFrame = []
+        Input.mouseButtonsUpThisFrame = []
 
     }
 
