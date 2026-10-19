@@ -1,12 +1,12 @@
 class LogsGameObject extends GameObject{
-    constructor(){
-        super("Logs", ["Wall"])
-        this.addComponent(new LogsController())
+    constructor(direction = 1, speed = 120){
+        super("Logs", ["Log"])
+        this.addComponent(new LogsController(), {direction:direction,speed:speed})
         this.addComponent(new Polygon(), {fillStyle:"brown", points:[
-            new Vector2(250,-10),
-            new Vector2(250,20),
-            new Vector2(360,20),
-            new Vector2(360,-10),
+            new Vector2(-55,-15),
+            new Vector2(-55,15),
+            new Vector2(55,15),
+            new Vector2(55,-15),
         ]})
     }
 }

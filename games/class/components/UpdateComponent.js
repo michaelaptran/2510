@@ -11,7 +11,6 @@ class UpdateComponent extends Component{
 
     update(){
         this.timeSinceLastLaser += 1
-        console.log(Input.keysDown)
 
         if (Input.keysDown.includes("ArrowUp"))
             this.transform.position.y = this.transform.position.y - Time.deltaTime * this.speed
@@ -23,11 +22,11 @@ class UpdateComponent extends Component{
             this.transform.position.x = this.transform.position.x + Time.deltaTime * this.speed
 
 
-        if (this.timeSinceLastLaser > 20 && Input.keysDown.includes("Space")){
+        if (this.timeSinceLastLaser > 20){
             this.timeSinceLastLaser = 0
             let laserGameObject = instantiate(new LaserGameObject(), this.transform.position.clone())
             if (Math.random() < .5)
-            laserGameObject.getComponent(Polygon).fillStyle = "#FF9911"
+            laserGameObject.getComponent(Polygon).fillStyle = "#0d0802"
         }
 
         Camera.main.transform.position = this.transform.position.clone()

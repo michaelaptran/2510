@@ -1,6 +1,6 @@
 class UpdateComponent extends Component{
 
-    jump = 50
+    jump = 100
     start(){
 
 
@@ -8,7 +8,7 @@ class UpdateComponent extends Component{
 
     update(){
 
-        console.log(Input.keysDown)
+        //console.log(Input.keysDown)
 
         if (Input.keysDownThisFrame.includes("ArrowUp")){
             this.transform.position.y = this.transform.position.y - this.jump
@@ -29,6 +29,34 @@ class UpdateComponent extends Component{
 
 
         let myPosition = this.transform.position
+
+        let logGameObjects = GameObject.findGameObjectsWithTag("Log")
+        let onLog = false
+
+        for (const log of logGameObjects){
+            let logPosition = log.transform.position
+
+            let distanceX = Math.abs(myPosition.x - logPosition.x)
+            let distanceY = Math.abs(myPosition.y - logPosition.y)
+            if(distanceX < 55 && distanceY < 35){
+                onLog = true
+                let logController = log.getComponent(LogsController)
+                //Moving frog with log
+                this.transform.position.x += Time.deltaTime * logController.speed * logController.direction
+                break
+            }
+        }
+
+        //Checking whether the frog is in the river 
+        let inWater = this.transform.position.y < -500 && this.transform.position.y > -1500
+
+        if(inWater && !onLog){
+            //Spawns frog back at starting position
+            this.transform.position.x = 0
+            this.transform.position.y = 300
+        }
+
+        // Collision check for cars
         let mainGameObject = GameObject.find("Main")
         let carGameObjects = GameObject.findGameObjectsWithTag("Wall")
         for(const carGameObject of carGameObjects){

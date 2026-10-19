@@ -2,7 +2,7 @@ class LaserController extends Component{
     update(){
         this.transform.position.y -= Time.deltaTime * 200
 
-        if(this.transform.position.y < 50){
+        if(this.transform.position.y < -500){
             this.gameObject.destroy()
         }
 
