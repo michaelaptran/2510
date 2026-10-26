@@ -1,7 +1,18 @@
 class Level01 extends Scene{
     constructor(){
         super()
+        //Road Level
         this.instantiate(new RoadGameObject(), new Vector2(0,0))
+        this.instantiate(new CarGameObject(1,150), new Vector2(-1100,0))
+        this.instantiate(new CarGameObject(-1,150), new Vector2(1100,-100))
+
+        this.instantiate(new CarGameObject(-1,250), new Vector2(1100,100))
+
+
+        this.instantiate(new CarGameObject(1,180), new Vector2(-1100,300))
+        this.instantiate(new CarGameObject(-1,180), new Vector2(1100,200))
+
+        this.instantiate(new CarGameObject(1,250), new Vector2(1100,-200))
 
 
 

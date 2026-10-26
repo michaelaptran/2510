@@ -53,7 +53,7 @@ class UpdateComponent extends Component{
         if(inWater && !onLog){
             //Spawns frog back at starting position
             this.transform.position.x = 0
-            this.transform.position.y = 300
+            this.transform.position.y = 500
         }
 
         // Collision check for cars

@@ -9,6 +9,8 @@ class LevelController extends Component{
         if(!mainGameObject){
             //Change scene to level 1
             SceneManager.loadScene(Level01)
+        }else if(mainGameObject.transform.position.y <= -2000){
+            SceneManager.loadScene(EndScreen)
         }
         
     }
