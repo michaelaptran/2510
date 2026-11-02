@@ -5,10 +5,10 @@ class WaterGameObject extends GameObject{
         this.addComponent(new WaterController())
 
         this.addComponent(new Polygon(), {fillStyle:"Blue", points:[
-            new Vector2(-2000,-500),
-            new Vector2(2000,-500),
-            new Vector2(2000,500),
-            new Vector2(-2000,500)
+            new Vector2(-4000,-500),
+            new Vector2(4000,-500),
+            new Vector2(4000,500),
+            new Vector2(-4000,500)
         ]})
         
     }

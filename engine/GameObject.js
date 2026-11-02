@@ -1,6 +1,7 @@
 class GameObject{
     components = []
     markForDestroy = false
+    visible = true
 
 
     name
@@ -43,6 +44,9 @@ class GameObject{
     }
 
     draw(ctx){
+        if(!this.visible){   //If the game object is not visible, skip drawing it
+            return
+        }
 
         ctx.save()
         ctx.setTransform(ctx.getTransform().multiply(this.transform.getWorldMatrix()))

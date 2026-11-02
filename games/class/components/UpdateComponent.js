@@ -43,8 +43,8 @@ class UpdateComponent extends Component{
     onCollisionStay(other){
         console.log(other)
     }
-    onMouseOver(){
-        console.log("Mouse Over")
-    }
+    // onMouseOver(){
+    //     console.log("Mouse Over")
+    // }
 
 }

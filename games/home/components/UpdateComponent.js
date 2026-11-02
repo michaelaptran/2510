@@ -1,5 +1,14 @@
 class UpdateComponent extends Component{
 
+    health = 3
+    isInvulnerable = false
+    invulnerabilityTimer = 0
+    invulnerabilityDuration = 2
+    flashTimer = 0
+    flashInterval = 0.15
+
+
+
     jump = 100
     start(){
 
@@ -25,6 +34,25 @@ class UpdateComponent extends Component{
         else if (Input.keysDownThisFrame.includes("ArrowRight")){
             this.transform.position.x = this.transform.position.x + this.jump
             //this.transform.rotation = Math.PI / 2
+        }
+
+        //Invulnerability timer
+        if (this.isInvulnerable) {
+            this.invulnerabilityTimer -= Time.deltaTime
+            this.flashTimer -= Time.deltaTime
+
+            if (this.flashTimer <= 0) {
+                this.setFrogVisibility(!this.gameObject.visible)
+                this.flashTimer = this.flashInterval
+                
+            }
+
+            if (this.invulnerabilityTimer < 0) {
+                this.isInvulnerable = false
+                this.invulnerabilityTimer = 0
+                
+                this.setFrogVisibility(true)
+            }
         }
 
 
@@ -57,18 +85,46 @@ class UpdateComponent extends Component{
         }
 
         // Collision check for cars
-        let mainGameObject = GameObject.find("Main")
-        let carGameObjects = GameObject.findGameObjectsWithTag("Wall")
+        //let mainGameObject = GameObject.find("Main")
+        const carGameObjects = GameObject.findGameObjectsWithTag("Wall")
         for(const carGameObject of carGameObjects){
-            let carPosition = carGameObject.transform.position
-            let distance = myPosition.minus(carPosition).magnitude
-            if(distance < 5){
-                mainGameObject.destroy()
+           const isCollision = Collisions.isCollisionPolygonPolygon(this.gameObject, carGameObject)
 
-            }
-        }
+           if(isCollision && !this.isInvulnerable){
+                this.health--
+                this.isInvulnerable = true
+                this.invulnerabilityTimer = this.invulnerabilityDuration
+
+                //Start flashing
+                this.flashTimer = this.flashInterval
+                this.setFrogVisibility(false)
+
+            
+                //console.log("Frog collided with a car!")
+
+                if (this.health <= 0){
+                    console.log("Game Over!")
+                    this.transform.position.x = 0
+                    this.transform.position.y = 500
+                    this.health = 3
+                    return
+                }
+
+                break
+           }
+        
         Camera.main.transform.position = this.transform.position.clone()
+
+        }
 
     }
 
+    setFrogVisibility(visible) {
+            this.gameObject.visible = visible
+            for(const gameObject of SceneManager.currentScene.gameObjects){
+                if(gameObject.transform.parent === this.gameObject.transform){
+                    gameObject.visible = visible
+                }
+            }
+        }
 }

@@ -8,5 +8,6 @@ class CarGameObject extends GameObject{
             new Vector2(120,20),
             new Vector2(120,-10),
         ]})
+        this.addComponent(new Collider())
 }
 }

@@ -16,6 +16,7 @@ class MainGameObject extends GameObject{
             new Vector2(-15,25),
             new Vector2(-25,10),
         ]})
+        this.addComponent(new Collider())
     
 }
 }

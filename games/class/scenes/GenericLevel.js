@@ -2,6 +2,7 @@ class GenericLevel extends Scene{
     constructor(){
         super()
         let mainGameObject = this.instantiate(new PlayerShipGameObject(), new Vector2(50,300))
+        mainGameObject.getComponent(Polygon).fillStyle = "red"
         this.instantiate(new PointsGameObject(), new Vector2(0,20))
         let helperGameObject = this.instantiate(new HelperGameObject(), new Vector2(50,50))
 
