@@ -19,7 +19,7 @@ class LevelController extends Component{
             return
         }
         if(screenController.gameState == "gamewon"){
-            SceneManager.loadScene(GameOverScreen)
+            SceneManager.loadScene(WinScreen)
             return
         }
 

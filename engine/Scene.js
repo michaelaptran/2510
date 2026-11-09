@@ -67,11 +67,12 @@ class Scene {
 
                     if(!one.getComponent(Collider).isTrigger && !two.getComponent(Collider).isTrigger){
                         physicalCollisions.push({one:collidable[i], two:collidable[j], minimumTransformVector})
-                        collidable[i].broadcastMessage("onCollisionStay", [collidable[j]])
-                        collidable[j].broadcastMessage("onCollisionStay", [collidable[i]])
+                        collidable[i].broadcastMessage("onCollisionStay", [collidable[j], minimumTransformVector])
+                        collidable[j].broadcastMessage("onCollisionStay", [collidable[i], minimumTransformVector.scaled(-1)])
+                        physicalCollisions.push({one:collidable[i], two:collidable[j], minimumTransformVector})
                     } else {
-                        collidable[i].broadcastMessage("onTriggerStay", [collidable[j]])
-                        collidable[j].broadcastMessage("onTriggerStay", [collidable[i]])
+                        collidable[i].broadcastMessage("onTriggerStay", [collidable[j], minimumTransformVector])
+                        collidable[j].broadcastMessage("onTriggerStay", [collidable[i], minimumTransformVector.scaled(-1)])
                     }
                 }
             }

@@ -36,9 +36,7 @@ class SquareController extends Component {
 
   }
 
-    onXStay(other, minimumTransformVector){
-      
-      }
+
     onTriggerStay(other, minimumTransformVector){
       if(other.name == "CoinGameObject"){
         other.destroy()

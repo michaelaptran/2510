@@ -15,16 +15,7 @@ class UpdateComponent extends Component{
 
 
     }
-
-    update(){
-        if(this.gameState != "playing"){
-            if(Input.keysDownThisFrame.includes("KeyR")){
-                this.restartGame()
-            }
-            return
-        }
-
-
+    fixedUpdate(){
         //console.log(Input.keysDown)
 
         if (Input.keysDownThisFrame.includes("ArrowUp")){
@@ -43,6 +34,16 @@ class UpdateComponent extends Component{
             this.transform.position.x = this.transform.position.x + this.jump
             //this.transform.rotation = Math.PI / 2
         }
+    }
+
+    update(){
+        if(this.gameState != "playing"){
+            if(Input.keysDownThisFrame.includes("KeyR")){
+                this.restartGame()
+            }
+            return
+        }
+
 
         //Invulnerability timer
         if (this.isInvulnerable) {
@@ -110,7 +111,7 @@ class UpdateComponent extends Component{
         for(const goalGameObject of goalGameObjects){
             const isCollision = Collisions.isCollisionPolygonPolygon(this.gameObject, goalGameObject)
             if(isCollision){
-                this.gameState = "won"
+                this.gameState = "gamewon"
                 console.log("You won!")
                 break
             }
@@ -159,7 +160,7 @@ class UpdateComponent extends Component{
 
         //Respawn Frog
         this.transform.position.x = 0
-        this.transform.position.y = 500
+        this.transform.position.y = 2100
 
         if(this.health <= 0){
             this.health = 0
@@ -176,5 +177,11 @@ class UpdateComponent extends Component{
         //Start flashing
         this.flashTimer = this.flashInterval
         this.setFrogVisibility(false)
+    }
+    onTriggerStay(other, minimumTransformVector){
+      if(other.name == "HealthCoinGameObject"){
+        this.health = Math.min(this.health + 1, 3) // Increase health by 1, but not above 3
+        other.destroy()
+      }
     }
 }

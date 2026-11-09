@@ -1,7 +1,7 @@
 class GenericLevel extends Scene{
     constructor(){
         super()
-        let frog = this.instantiate(new MainGameObject(), new Vector2(0, 500))
+        let frog = this.instantiate(new MainGameObject(), new Vector2(0, 2100))
         let head = this.instantiate(new FrogHead(),new Vector2(0, -45))
         let leftArm = this.instantiate(new FrogLeftArm(),new Vector2(-20, -20))
         let rightArm = this.instantiate(new FrogRightArm(),new Vector2(20, -20))
