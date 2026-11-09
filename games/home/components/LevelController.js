@@ -9,9 +9,21 @@ class LevelController extends Component{
         if(!mainGameObject){
             //Change scene to level 1
             SceneManager.loadScene(Level01)
-        }else if(mainGameObject.transform.position.y <= -2000){
-            SceneManager.loadScene(EndScreen)
+            return
         }
+
+        let screenController = mainGameObject.getComponent(UpdateComponent)
+        
+        if(screenController.gameState == "gameover"){
+            SceneManager.loadScene(GameOverScreen)
+            return
+        }
+        if(screenController.gameState == "gamewon"){
+            SceneManager.loadScene(GameOverScreen)
+            return
+        }
+
+        
         
     }
 }

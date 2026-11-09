@@ -6,6 +6,7 @@ class UpdateComponent extends Component{
     invulnerabilityDuration = 2
     flashTimer = 0
     flashInterval = 0.15
+    gameState = "playing"
 
 
 
@@ -16,6 +17,13 @@ class UpdateComponent extends Component{
     }
 
     update(){
+        if(this.gameState != "playing"){
+            if(Input.keysDownThisFrame.includes("KeyR")){
+                this.restartGame()
+            }
+            return
+        }
+
 
         //console.log(Input.keysDown)
 
@@ -76,47 +84,61 @@ class UpdateComponent extends Component{
         }
 
         //Checking whether the frog is in the river 
-        let inWater = this.transform.position.y < -500 && this.transform.position.y > -1500
+        let inWater = this.transform.position.y < -500 && this.transform.position.y > -1200
 
         if(inWater && !onLog){
             //Spawns frog back at starting position
-            this.transform.position.x = 0
-            this.transform.position.y = 500
+            this.takeDamage()
         }
 
         // Collision check for cars
-        //let mainGameObject = GameObject.find("Main")
         const carGameObjects = GameObject.findGameObjectsWithTag("Wall")
         for(const carGameObject of carGameObjects){
            const isCollision = Collisions.isCollisionPolygonPolygon(this.gameObject, carGameObject)
 
            if(isCollision && !this.isInvulnerable){
-                this.health--
-                this.isInvulnerable = true
-                this.invulnerabilityTimer = this.invulnerabilityDuration
-
-                //Start flashing
-                this.flashTimer = this.flashInterval
-                this.setFrogVisibility(false)
-
-            
-                //console.log("Frog collided with a car!")
-
-                if (this.health <= 0){
-                    console.log("Game Over!")
-                    this.transform.position.x = 0
-                    this.transform.position.y = 500
-                    this.health = 3
-                    return
-                }
-
+                this.takeDamage()
                 break
            }
         
-        Camera.main.transform.position = this.transform.position.clone()
+        
 
         }
 
+        //Check for collision with goal
+        const goalGameObjects = GameObject.findGameObjectsWithTag("Goal")
+        for(const goalGameObject of goalGameObjects){
+            const isCollision = Collisions.isCollisionPolygonPolygon(this.gameObject, goalGameObject)
+            if(isCollision){
+                this.gameState = "won"
+                console.log("You won!")
+                break
+            }
+
+        }
+
+
+        Camera.main.transform.position = this.transform.position.clone()
+    }
+
+    restartGame(){
+        //Reset health
+        this.health = 3
+
+        //Reset invulnerability
+        this.isInvulnerable = false
+        this.invulnerabilityTimer = 0
+        this.flashTimer = 0
+
+
+        this.setFrogVisibility(true)
+
+        //Reset frog position
+        this.gameObject.transform.position = new Vector2(0,500)
+
+        //Reset game state
+        this.gameState = "playing"
+        console.log("Game restarted!")
     }
 
     setFrogVisibility(visible) {
@@ -127,4 +149,32 @@ class UpdateComponent extends Component{
                 }
             }
         }
+        
+    takeDamage(){
+        //Don't take damage if invulnerable or the game is over
+        if (this.isInvulnerable || this.gameState != "playing") {
+            return
+        }
+        this.health--
+
+        //Respawn Frog
+        this.transform.position.x = 0
+        this.transform.position.y = 500
+
+        if(this.health <= 0){
+            this.health = 0
+            this.gameState = "gameover"
+            this.setFrogVisibility(true)
+            console.log("Game Over!")
+            return
+        }
+
+        //Start invulnerability
+        this.isInvulnerable = true
+        this.invulnerabilityTimer = this.invulnerabilityDuration
+
+        //Start flashing
+        this.flashTimer = this.flashInterval
+        this.setFrogVisibility(false)
+    }
 }

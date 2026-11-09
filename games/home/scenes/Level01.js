@@ -35,6 +35,18 @@ class Level01 extends Scene{
         this.instantiate(new LogsGameObject(-1,100), new Vector2(-400,-900))
         this.instantiate(new LogsGameObject(-1,100), new Vector2(300,-900))
         this.instantiate(new LogsGameObject(-1,100), new Vector2(1100,-900))
+        //Fifth row of logs
+        this.instantiate(new LogsGameObject(1,200), new Vector2(-500,-1000))
+        this.instantiate(new LogsGameObject(1,200), new Vector2(300,-1000))
+        this.instantiate(new LogsGameObject(1,200), new Vector2(1100,-1000))
+        //Sixth row of logs (reverse)
+        this.instantiate(new LogsGameObject(-1,150), new Vector2(-300,-1100))
+        this.instantiate(new LogsGameObject(-1,150), new Vector2(400,-1100))
+        this.instantiate(new LogsGameObject(-1,150), new Vector2(1100,-1100))
+
+
+        //Goal
+        this.instantiate(new GoalGameObject(), new Vector2(0,-1200))
 
 
 

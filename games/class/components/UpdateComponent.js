@@ -22,6 +22,11 @@ class UpdateComponent extends Component{
             this.transform.position.x = this.transform.position.x + Time.deltaTime * this.speed
 
 
+
+        if (Input.keysDown.includes("q")){
+            this.gameObject.destroy()
+        }
+        
         if (this.timeSinceLastLaser > 20){
             this.timeSinceLastLaser = 0
             let laserGameObject = instantiate(new LaserGameObject(), this.transform.position.clone())
@@ -40,7 +45,7 @@ class UpdateComponent extends Component{
         }
 
     }
-    onCollisionStay(other){
+    onCollisionsStay(other, minimumTransformVector){
         console.log(other)
     }
     // onMouseOver(){
