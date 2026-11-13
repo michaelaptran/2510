@@ -42,6 +42,10 @@ class Scene {
         if(Input.mousePosition){
             let matrix = new DOMMatrix()
             matrix.translateSelf(Engine.canvas.width/2, Engine.canvas.height/2)
+            if(Engine.cameraWidthInWorldSpace){
+            const scalar = Engine.cameraWidthInWorldSpace / Engine.canvas.width
+            matrix.scaleSelf(1 / scalar, 1 / scalar)
+        }
             matrix.multiplySelf(Camera.main.transform.getWorldMatrix().inverse())
             let worldPositionDOMPoint = matrix.inverse().transformPoint(Input.mousePosition)
             let worldPosition = new Vector2(worldPositionDOMPoint.x, worldPositionDOMPoint.y)
@@ -112,11 +116,33 @@ class Scene {
     draw(ctx){
         ctx.fillStyle = Camera.main.backgroundColor
         ctx.fillRect(0, 0, Engine.canvas.width, Engine.canvas.height)
+
+        Engine.letterBoxingWidth = 0
+        Engine.letterBoxingHeight = 0
+        if(Engine.aspectRatio){
+            const currentAspectRatio = Engine.canvas.width / Engine.canvas.height
+            if(Engine.aspectRatio > currentAspectRatio){
+                const maxHeight = Engine.canvas.width / Engine.aspectRatio
+                Engine.letterBoxingHeight = Engine.canvas.height - maxHeight
+            } else{
+                const maxWidth = Engine.aspectRatio * Engine.canvas.height
+                Engine.letterBoxingWidth = Engine.canvas.width - maxWidth
+            }
+        }
+
+
+
         //Start Camera Code
         ctx.save()
         
         ctx.translate(Engine.canvas.width / 2, Engine.canvas.height / 2)
-        //ctx.translate(-Camera.main.transform.position.x, -Camera.main.transform.position.y)
+
+        if(Engine.cameraWidthInWorldSpace){
+            const scalar = Engine.cameraWidthInWorldSpace / Engine.canvas.width
+            ctx.scale(scalar, scalar)
+        }
+
+
         ctx.setTransform(ctx.getTransform().multiply(Camera.main.transform.getWorldMatrix().inverse()))
 
         for(const layer of Engine.layers.filter(l=>l!="UI")){
@@ -126,8 +152,17 @@ class Scene {
     }
         ctx.restore()
         //Stop Camera code
-        
+
+        //Draw letter boxing
+        ctx.fillStyle = "black"
+        ctx.fillRect(0, 0, Engine.canvas.width, Engine.letterBoxingHeight / 2)
+        ctx.fillRect(0, Engine.canvas.height - Engine.letterBoxingHeight / 2, Engine.canvas.width, Engine.letterBoxingHeight / 2)
+        ctx.fillRect(0,0, Engine.letterBoxingWidth / 2, Engine.canvas.height)
+        ctx.fillRect(Engine.canvas.width - Engine.letterBoxingWidth/2,0, Engine.letterBoxingWidth / 2, Engine.canvas.height)
+
+
         //UI layer
+        //ctx.translate(0,Engine.letterBoxingHeight/2)
         for(const gameObject of this.gameObjects.filter(go=> go.layer == "UI")){
             gameObject.draw(ctx)
         }
